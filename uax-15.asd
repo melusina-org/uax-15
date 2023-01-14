@@ -28,3 +28,14 @@
   :perform (test-op (o c)
 		    (symbol-call :parachute '#:test (find-symbol* 'suite :uax-15-tests)
 				      :report (find-symbol* 'quiet :parachute))))
+(defsystem "uax-15/testsuite"
+  :depends-on ("uax-15" "org.melusina.confidence" "cl-ppcre" "split-sequence")
+  :components
+  ((:module "src"
+            :components ((:file "trivial-utf-16")))
+   (:module "t"
+            :depends-on ("src")
+            :components ((:file "test-with-confidence"))))
+  :perform (test-op (o c)
+		    (symbol-call :parachute '#:test (find-symbol* 'suite :uax-15-tests)
+				      :report (find-symbol* 'quiet :parachute))))
